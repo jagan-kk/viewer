@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.schemas.workflow import WorkflowRun
 from app.services.github import GitHubClient
+from app import database
 
 app = FastAPI(title="CI/CD Release Dashboard")
 
