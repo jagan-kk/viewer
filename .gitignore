@@ -1,11 +1,17 @@
-# Python-generated files
+# python
+.venv/
 __pycache__/
 *.py[oc]
 build/
 dist/
 wheels/
 *.egg-info
-
-# Virtual environments
-.venv
+# node
+node_modules/
+dist/
+.vite/
+# secrets / local env
 .env
+# old nested repo backup
+.git_backup/
+backend/.git_backup/
