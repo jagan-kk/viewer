@@ -1,0 +1,12 @@
+# python
+.venv/
+__pycache__/
+*.pyc
+# node
+node_modules/
+dist/
+# secrets / local env
+.env
+# old nested repo backup
+.git_backup/
+backend/.git_backup/
