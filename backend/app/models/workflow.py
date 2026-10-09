@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import BigInteger, DateTime, Integer, String
+from sqlalchemy import BigInteger, DateTime, Integer, String, UniqueConstraint
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -21,3 +21,18 @@ class WorkflowRun(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime)
     updated_at: Mapped[datetime] = mapped_column(DateTime)
     html_url: Mapped[str] = mapped_column(String)
+    repository: Mapped[str | None] = mapped_column(String, nullable=True)
+
+
+class Repository(Base):
+    __tablename__ = "repositories"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    owner: Mapped[str] = mapped_column(String)
+    name: Mapped[str] = mapped_column(String)
+
+    __table_args__ = (UniqueConstraint("owner", "name", name="uq_repositories_owner_name"),)
+
+    @property
+    def full_name(self) -> str:
+        return f"{self.owner}/{self.name}"

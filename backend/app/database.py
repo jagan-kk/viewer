@@ -13,7 +13,20 @@ SessionLocal = sessionmaker(
     autocommit=False,
 )
 
-Base.metadata.create_all(bind=engine)
+
+def init_db() -> None:
+    Base.metadata.create_all(bind=engine)
+
+
+def check_db() -> bool:
+    from sqlalchemy import text
+
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        return True
+    except Exception:
+        return False
 
 def get_db():
     db = SessionLocal()
